@@ -1,0 +1,674 @@
+/* ========================================================
+   ONLINE SMART BUSINESS MANAGEMENT SYSTEM
+   Traditional, Professional Business Application Stylesheet
+   ======================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333333;
+    background-color: #f4f6f9;
+}
+
+/* Container & Layout */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ========================================================
+   AUTHENTICATION & LOGIN STYLES
+   ======================================================== */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f2f5;
+    padding: 20px;
+}
+
+.auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.auth-header {
+    text-align: center;
+    border-bottom: 2px solid #2b5797;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.auth-header h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a365d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.auth-header p {
+    font-size: 13px;
+    color: #666666;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+.form-control:focus {
+    border-color: #2b5797;
+    outline: none;
+    background-color: #fafbfc;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #555555;
+    margin-top: 5px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #2b5797;
+    color: #ffffff;
+    border-color: #1e3f70;
+}
+
+.btn-primary:hover {
+    background-color: #1e3f70;
+}
+
+.btn-danger {
+    background-color: #c9302c;
+    color: #ffffff;
+    border-color: #ac2925;
+}
+
+.btn-danger:hover {
+    background-color: #ac2925;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    border-color: #545b62;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    color: #ffffff;
+    border-color: #1b5e20;
+}
+
+.btn-success:hover {
+    background-color: #1b5e20;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* Auth Divider */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888888;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dcdfe6;
+}
+
+.auth-divider span {
+    padding: 0 12px;
+}
+
+/* Google Button */
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    border-color: #c6c9ce;
+    color: #202124;
+}
+
+.btn-google svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Alerts & Messages */
+.alert {
+    padding: 12px 15px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    border-left: 4px solid;
+}
+
+.alert-danger {
+    background-color: #fdf2f2;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+    border-left-width: 4px;
+    border-left-color: #d9534f;
+}
+
+.alert-success {
+    background-color: #f0f9eb;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    border-left-width: 4px;
+    border-left-color: #4caf50;
+}
+
+.alert-warning {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+    border: 1px solid #faebcc;
+    border-left-width: 4px;
+    border-left-color: #f0ad4e;
+}
+
+.alert-info {
+    background-color: #e8f4f8;
+    color: #31708f;
+    border: 1px solid #bce8f1;
+    border-left-width: 4px;
+    border-left-color: #31708f;
+}
+
+/* Legacy Role Demo Welcome Card */
+.role-welcome-card {
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    padding: 25px;
+    margin-top: 20px;
+}
+
+.role-welcome-card h2 {
+    color: #1a365d;
+    margin-bottom: 10px;
+}
+
+/* Tables */
+.user-info-table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.user-info-table th, .user-info-table td {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.user-info-table th {
+    background-color: #f8fafc;
+    width: 180px;
+    font-weight: bold;
+}
+
+/* ========================================================
+   PHASE 4: COMMON APPLICATION LAYOUT
+   ======================================================== */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Top Navigation Bar */
+.top-navbar {
+    height: 52px;
+    background-color: #1a365d;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 2px solid #0f243e;
+    flex-shrink: 0;
+}
+
+.navbar-brand a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.navbar-brand a:hover {
+    color: #e2e8f0;
+}
+
+.navbar-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.user-greeting {
+    color: #cbd5e0;
+}
+
+.user-greeting strong {
+    color: #ffffff;
+}
+
+.badge-role {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    color: #ffffff;
+}
+
+.badge-admin {
+    background-color: #2b5797;
+}
+
+.badge-stockiest {
+    background-color: #2e7d32;
+}
+
+.badge-distributor {
+    background-color: #b7791f;
+}
+
+.badge-retailer {
+    background-color: #6b46c1;
+}
+
+.user-id-tag {
+    color: #a0aec0;
+    font-size: 12px;
+}
+
+.btn-logout {
+    background-color: #c9302c;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    border: 1px solid #ac2925;
+}
+
+.btn-logout:hover {
+    background-color: #ac2925;
+}
+
+/* Layout Body Wrapper (Sidebar + Main) */
+.layout-body {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 52px - 38px);
+}
+
+/* Sidebar Navigation */
+.app-sidebar {
+    width: 230px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1a252f;
+}
+
+.sidebar-heading {
+    padding: 12px 18px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #95a5a6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 10px 18px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+.sidebar-menu li.active a {
+    background-color: #2b5797;
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 4px solid #ffffff;
+    padding-left: 14px;
+}
+
+.sidebar-divider {
+    height: 8px;
+    background-color: #243342;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-menu li a.menu-logout {
+    color: #ff9999;
+    font-weight: bold;
+}
+
+.sidebar-menu li a.menu-logout:hover {
+    background-color: #c9302c;
+    color: #ffffff;
+}
+
+.sidebar-footer-info {
+    margin-top: auto;
+    padding: 12px 18px;
+    background-color: #243342;
+    border-top: 1px solid #1a252f;
+    font-size: 12px;
+}
+
+.sidebar-user-name {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.sidebar-user-role {
+    color: #95a5a6;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+/* Main Content Area */
+.app-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f6f9;
+    min-width: 0;
+}
+
+.page-header {
+    background-color: #ffffff;
+    padding: 14px 20px;
+    border-bottom: 1px solid #dcdfe6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header h1 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a365d;
+    margin: 0;
+}
+
+.page-breadcrumb {
+    font-size: 12px;
+    color: #718096;
+}
+
+.page-content {
+    padding: 20px;
+    flex: 1;
+}
+
+/* Standard Rectangular Cards */
+.card {
+    background: #ffffff;
+    border: 1px solid #dcdfe6;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    background-color: #fafbfc;
+    border-bottom: 1px solid #dcdfe6;
+    padding: 10px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #1a365d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+/* Data Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.data-table th, .data-table td {
+    padding: 8px 12px;
+    border: 1px solid #dcdfe6;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #f8fafc;
+    font-weight: bold;
+    color: #333333;
+}
+
+.data-table tr:hover {
+    background-color: #fafbfc;
+}
+
+/* Grid System */
+.grid-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.grid-col-6 {
+    flex: 1;
+    min-width: 320px;
+}
+
+.grid-col-12 {
+    width: 100%;
+}
+
+/* Standard Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 7px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.badge-success {
+    background-color: #e6f4ea;
+    color: #137333;
+    border: 1px solid #ceead6;
+}
+
+.badge-warning {
+    background-color: #fef7e0;
+    color: #b06000;
+    border: 1px solid #feefc3;
+}
+
+.badge-danger {
+    background-color: #fce8e6;
+    color: #c5221f;
+    border: 1px solid #fad2cf;
+}
+
+.badge-info {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border: 1px solid #d2e3fc;
+}
+
+/* Quick Navigation List for Landing Cards */
+.module-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.module-card-item {
+    border: 1px solid #dcdfe6;
+    background-color: #ffffff;
+    padding: 14px;
+    border-radius: 3px;
+    display: block;
+    text-decoration: none;
+    color: #333333;
+}
+
+.module-card-item:hover {
+    border-color: #2b5797;
+    background-color: #f8fafc;
+}
+
+.module-card-item h4 {
+    font-size: 14px;
+    color: #1a365d;
+    margin-bottom: 4px;
+}
+
+.module-card-item p {
+    font-size: 12px;
+    color: #666666;
+}
+
+/* Footer */
+.app-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #dcdfe6;
+    padding: 10px 20px;
+    font-size: 12px;
+    color: #718096;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.footer-separator {
+    margin: 0 8px;
+    color: #cbd5e0;
+}
