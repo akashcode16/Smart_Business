@@ -1,1 +1,3 @@
 config/google_oauth.php
+tests/*.txt
+tests/chrome_profile/

@@ -56,26 +56,26 @@ if (!$google_user || !isset($google_user['email']) || !isset($google_user['sub']
 $google_id = $google_user['sub'];
 $google_email = strtolower(trim($google_user['email']));
 
-// 5. Query existing user linked by google_id or google_email
+// 5. Query existing user linked by google_id, google_email or email
 $query = "SELECT u.id, u.user_id, u.full_name, u.role_id, u.status, u.google_id, u.google_email, r.role_name 
           FROM users u 
           JOIN roles r ON u.role_id = r.id 
-          WHERE u.google_id = ? OR (LOWER(u.google_email) = ? AND u.google_email IS NOT NULL AND u.google_email != '') 
+          WHERE u.google_id = ? OR (LOWER(u.email) = ? AND u.email IS NOT NULL AND u.email != '') OR (LOWER(u.google_email) = ? AND u.google_email IS NOT NULL AND u.google_email != '') 
           LIMIT 1";
 
 $user = null;
 if ($stmt = mysqli_prepare($conn, $query)) {
-    mysqli_stmt_bind_param($stmt, "ss", $google_id, $google_email);
+    mysqli_stmt_bind_param($stmt, "sss", $google_id, $google_email, $google_email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     $user = mysqli_fetch_assoc($result);
     mysqli_stmt_close($stmt);
 }
 
-// 6. Enforce security: Account MUST be pre-registered by Admin
+// 6. Enforce security: Account MUST be pre-registered by Admin or via Registration
 if (!$user) {
     // Unregistered Google Account - DO NOT create a new user or role
-    $_SESSION['auth_error'] = "This Google account (" . htmlspecialchars($google_email) . ") is not registered in the system. Please contact the administrator.";
+    $_SESSION['auth_error'] = "This Google account (" . htmlspecialchars($google_email) . ") is not registered in the system. Please register first or contact the administrator.";
     header("Location: login.php");
     exit;
 }
@@ -87,9 +87,9 @@ if ($user['status'] !== 'Active') {
     exit;
 }
 
-// 8. If google_id is not yet linked on this user, link it now
+// 8. If google_id is not yet linked on this user, link it now and mark verified
 if (empty($user['google_id'])) {
-    $update_query = "UPDATE users SET google_id = ?, google_email = ? WHERE id = ?";
+    $update_query = "UPDATE users SET google_id = ?, google_email = ?, is_verified = 1 WHERE id = ?";
     if ($update_stmt = mysqli_prepare($conn, $update_query)) {
         mysqli_stmt_bind_param($update_stmt, "ssi", $google_id, $google_email, $user['id']);
         mysqli_stmt_execute($update_stmt);

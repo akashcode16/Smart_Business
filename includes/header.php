@@ -28,8 +28,12 @@ $current_user = get_logged_in_user();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($page_title); ?> - Smart Business Management System</title>
-    <!-- Business Application Stylesheet -->
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css">
+    <!-- Business Application Stylesheet with Cache Busting -->
+    <?php
+    $css_path = dirname(__DIR__) . '/assets/css/style.css';
+    $css_version = file_exists($css_path) ? filemtime($css_path) : time();
+    ?>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>assets/css/style.css?v=<?php echo $css_version; ?>">
 </head>
 <body>
     <div class="app-container">

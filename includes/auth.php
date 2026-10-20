@@ -107,4 +107,77 @@ function require_role($allowed_roles, $redirect_path = '') {
         exit;
     }
 }
+
+/**
+ * Check if the logged-in user matches a specific role
+ *
+ * @param string $role
+ * @return bool
+ */
+function has_role($role) {
+    if (!is_logged_in()) {
+        return false;
+    }
+    return strtolower($_SESSION['role_name'] ?? '') === strtolower($role);
+}
+
+function is_admin() {
+    return has_role('Admin');
+}
+
+function is_stockiest() {
+    return has_role('Stockiest');
+}
+
+function is_distributor() {
+    return has_role('Distributor');
+}
+
+function is_retailer() {
+    return has_role('Retailer');
+}
+
+/**
+ * CSRF Protection Helpers
+ */
+function get_csrf_token() {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function csrf_input() {
+    return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars(get_csrf_token(), ENT_QUOTES, 'UTF-8') . '">';
+}
+
+function verify_csrf_token($token) {
+    if (empty($token) || empty($_SESSION['csrf_token'])) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
+/**
+ * Flash messaging helpers
+ */
+function set_flash($type, $message) {
+    if (!isset($_SESSION['flash'])) {
+        $_SESSION['flash'] = [];
+    }
+    $_SESSION['flash'][] = ['type' => $type, 'message' => $message];
+}
+
+function get_flash() {
+    $messages = $_SESSION['flash'] ?? [];
+    unset($_SESSION['flash']);
+    return $messages;
+}
+
+/**
+ * HTML Escaping helper
+ */
+function e($str) {
+    return htmlspecialchars((string)($str ?? ''), ENT_QUOTES, 'UTF-8');
+}
 ?>

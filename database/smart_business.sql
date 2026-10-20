@@ -29,13 +29,18 @@ CREATE TABLE IF NOT EXISTS `users` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` VARCHAR(50) NOT NULL UNIQUE,
     `full_name` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(100) DEFAULT NULL,
     `password` VARCHAR(255) DEFAULT NULL,
     `role_id` INT(11) NOT NULL,
     `status` ENUM('Active', 'Inactive') DEFAULT 'Active',
+    `is_verified` TINYINT(1) NOT NULL DEFAULT 1,
+    `verification_token` VARCHAR(100) DEFAULT NULL,
+    `token_expiry` DATETIME DEFAULT NULL,
     `google_id` VARCHAR(100) DEFAULT NULL,
     `google_email` VARCHAR(100) DEFAULT NULL,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
+    UNIQUE KEY `unique_email` (`email`),
     UNIQUE KEY `unique_google_id` (`google_id`),
     UNIQUE KEY `unique_google_email` (`google_email`),
     KEY `fk_users_role` (`role_id`),
@@ -100,9 +105,12 @@ CREATE TABLE IF NOT EXISTS `customers` (
     `phone` VARCHAR(20) NOT NULL,
     `email` VARCHAR(100) DEFAULT NULL,
     `address` TEXT DEFAULT NULL,
+    `created_by` INT(11) DEFAULT NULL,
     `status` ENUM('Active', 'Inactive') DEFAULT 'Active',
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    KEY `fk_customers_created_by` (`created_by`),
+    CONSTRAINT `fk_customers_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -230,11 +238,37 @@ CREATE TABLE IF NOT EXISTS `payments` (
     `payment_id` VARCHAR(50) NOT NULL UNIQUE,
     `transaction_type` ENUM('Purchase', 'Sale') NOT NULL,
     `reference_id` VARCHAR(50) NOT NULL,
+    `user_id` INT(11) DEFAULT NULL,
     `amount` DECIMAL(12,2) NOT NULL,
     `payment_date` DATE NOT NULL,
     `payment_method` ENUM('Cash', 'Card', 'UPI', 'Bank Transfer', 'Credit') NOT NULL DEFAULT 'Cash',
     `notes` TEXT DEFAULT NULL,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`),
-    KEY `idx_payments_reference` (`reference_id`)
+    KEY `idx_payments_reference` (`reference_id`),
+    KEY `fk_payments_user` (`user_id`),
+    CONSTRAINT `fk_payments_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+-- Table: stock_movements
+-- Audit trail for all inventory movements & adjustments
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `stock_movements` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `user_id` INT(11) NOT NULL,
+    `product_id` INT(11) NOT NULL,
+    `movement_type` ENUM('Opening', 'Purchase', 'Transfer In', 'Transfer Out', 'Sale', 'Adjustment') NOT NULL,
+    `quantity` INT(11) NOT NULL,
+    `balance_before` INT(11) NOT NULL DEFAULT 0,
+    `balance_after` INT(11) NOT NULL DEFAULT 0,
+    `reference_id` VARCHAR(50) DEFAULT NULL,
+    `notes` TEXT DEFAULT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    KEY `fk_movements_user` (`user_id`),
+    KEY `fk_movements_product` (`product_id`),
+    CONSTRAINT `fk_movements_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `fk_movements_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
